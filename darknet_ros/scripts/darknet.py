@@ -43,8 +43,6 @@ class IMAGE(Structure):
 class METADATA(Structure):
     _fields_ = [("classes", c_int),
                 ("names", POINTER(c_char_p))]
-    print "aaaaaaaaaaaaaaaaaaaaaaaa"
-    print ("names", POINTER(c_char_p))
 
 class DETECTION(Structure):
     _fields_ = [("bbox", BOX),

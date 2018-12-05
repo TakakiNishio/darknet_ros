@@ -30,6 +30,9 @@ if __name__ == "__main__":
     weights_filename = file_path+"/../darknet/yolov3.weights"
     meta_filename = file_path+"/../darknet/cfg/coco.data"
 
+    if os.path.isdir('data'):
+        shutil.rmtree('data')
+
     os.mkdir("data")
     shutil.copy(file_path+"/../darknet/data/coco.names","data")
 
