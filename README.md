@@ -9,7 +9,7 @@
 - OpenCV 3.3.1 (or higer)
 
 ## Initial build of this repository
-Clone this repositosy using SSH.
+Clone this repository using SSH.
 ```
 $ cd <your_workspace>/src
 $ git clone --recursive git@github.com:TakakiNishio/darknet_ros.git
