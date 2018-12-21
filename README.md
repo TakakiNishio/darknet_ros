@@ -24,7 +24,14 @@ Weight files can be downloaded from [this site](https://drive.google.com/open?id
 Place them inside the `darknet` directory.
 
 ## Running an Example
+- simple example
 ```
 $ rosrun darknet_rospy darknet_webcam.py
 ```
-
+- libuvc camera streaming
+```
+$ roslaunch darknet_rospy single_camera_streaming.launch 
+```
+```
+$ rosrun darknet_rospy darknet_webcam.py
+```
