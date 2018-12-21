@@ -24,7 +24,7 @@ if __name__ == "__main__":
     ret, img = cap.read()
 
     rospack = rospkg.RosPack()
-    file_path = rospack.get_path('darknet_pyros')
+    file_path = rospack.get_path('darknet_rospy')
 
     net_filename = file_path+"/../darknet/cfg/yolov3.cfg"
     weights_filename = file_path+"/../darknet/yolov3.weights"

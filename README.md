@@ -25,6 +25,6 @@ Place them inside the `darknet` directory.
 
 ## Running an Example
 ```
-$ rosrun darknet_ros darknet_webcam.py
+$ rosrun darknet_rospy darknet_webcam.py
 ```
 

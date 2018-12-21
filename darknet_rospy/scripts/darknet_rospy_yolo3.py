@@ -27,7 +27,7 @@ class DarknetPyNode:
         rospy.init_node('darknet_ros', anonymous=True)
 
         rospack = rospkg.RosPack()
-        file_path = rospack.get_path('darknet_pyros')
+        file_path = rospack.get_path('darknet_rospy')
         net_file = file_path+"/../darknet/cfg/yolov3.cfg"
         weights_file = file_path+"/../darknet/yolov3.weights"
         meta_file = file_path+"/../darknet/cfg/coco.data"
