@@ -4,8 +4,8 @@ import rospkg
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
-import sys
-sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+# import sys
+# sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
 
 from ctypes import *
 import math
@@ -38,7 +38,6 @@ class DarknetPyNode:
 
         os.mkdir("data")
         shutil.copy(names_file, "data")
-
         self.net = load_net(net_file.encode('utf-8'), weights_file.encode('utf-8'), 0)
         self.meta = load_meta(meta_file.encode('utf-8'))
         shutil.rmtree("data")
