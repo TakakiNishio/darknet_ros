@@ -7,6 +7,7 @@
 - CUDA 8.0 (or higher)
 - CuDNN 6 (or higer)
 - OpenCV 3.3.1 (or higer)
+- [libuvc_camera](http://wiki.ros.org/libuvc_camera) (for USB camera)
 
 ## Initial build of this repository
 Clone this repository using SSH.
@@ -15,6 +16,7 @@ $ cd <your_workspace>/src
 $ git clone --recursive git@github.com:TakakiNishio/darknet_ros.git
 $ cd darknet_ros/darknet && make -j4
 $ cd <your_workspace>
+$ rosdep install -iry --from-paths src
 $ catkin build
 ```
 
@@ -33,5 +35,5 @@ Place them inside the `darknet` directory.
   $ roslaunch darknet_rospy single_camera_streaming.launch 
   ```
   ```
-  $ rosrun darknet_rospy darknet_webcam.py
+  $ rosrun darknet_rospy darknet_rospy_yolo3.py
   ```
