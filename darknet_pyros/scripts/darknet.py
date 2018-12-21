@@ -53,7 +53,7 @@ class DETECTION(Structure):
                 ("sort_class", c_int)]
 
 rospack = rospkg.RosPack()
-file_path = rospack.get_path('darknet_ros')
+file_path = rospack.get_path('darknet_pyros')
 lib = CDLL(file_path+"/../darknet/libdarknet.so", RTLD_GLOBAL)
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
