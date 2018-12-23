@@ -35,5 +35,5 @@ Place them inside the `darknet` directory.
   $ roslaunch darknet_rospy single_camera_streaming.launch 
   ```
   ```
-  $ rosrun darknet_rospy darknet_rospy_yolo3.py
+  $ roslaunch darknet_rospy darknet_rospy_yolo3.launch
   ```
