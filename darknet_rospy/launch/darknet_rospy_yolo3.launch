@@ -1,0 +1,21 @@
+<launch>
+
+  <!-- darknet_rospy -->
+  <arg name="input_image_topic" default="/camera/image_color" />
+  <arg name="output_image_topic" default="/recognition_result_image" />
+
+  <arg name="net_file" default="/../darknet/cfg/yolov3.cfg" />
+  <arg name="weights_file" default="/../darknet/yolov3.weights" />
+  <arg name="meta_file" default="/../darknet/cfg/coco.data" />
+  <arg name="names_file" default="/../darknet/data/coco.names" />
+  
+  <node pkg="darknet_rospy" type="darknet_rospy.py" name="darknet_rospy" output="screen">
+    <param name="net_file" type="str" value="$(arg net_file)" />
+    <param name="weights_file" type="str" value="$(arg weights_file)" />
+    <param name="names_file" type="str" value="$(arg names_file)" />
+    <param name="meta_file" type="str" value="$(arg meta_file)" />
+    <param name="input_image_topic" type="str" value="$(arg input_image_topic)" />
+    <param name="output_image_topic" type="str" value="$(arg output_image_topic)" />
+  </node>
+
+</launch>

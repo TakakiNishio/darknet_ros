@@ -28,12 +28,12 @@ class DarknetPyNode:
 
         rospack = rospkg.RosPack()
         file_path = rospack.get_path('darknet_rospy')
-        net_file = file_path+"/../darknet/cfg/yolov3.cfg"
-        weights_file = file_path+"/../darknet/yolov3.weights"
-        meta_file = file_path+"/../darknet/cfg/coco.data"
-        names_file = file_path+"/../darknet/data/coco.names"
-        input_image_topic = "/camera/image_color"
-        output_image_topic = "/recognition_result"
+        net_file = file_path+rospy.get_param('~net_file', "/../darknet/cfg/yolov3.cfg")
+        weights_file = file_path+rospy.get_param('~weights_file', "/../darknet/yolov3.weights")
+        meta_file = file_path+rospy.get_param('~meta_file', "/../darknet/cfg/coco.data")
+        names_file = file_path+rospy.get_param('~names_file', "/../darknet/data/coco.names")
+        input_image_topic = rospy.get_param('~input_image_topic', "/camera/image_color")
+        output_image_topic = rospy.get_param('~output_image_topic', "/recognition_result")
 
         if os.path.isdir('data'):
             shutil.rmtree('data')
