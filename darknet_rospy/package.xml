@@ -2,7 +2,7 @@
 <package format="2">
   <name>darknet_rospy</name>
   <version>0.0.0</version>
-  <description>darknet python ros package</description>
+  <description>darknet python ros python package</description>
 
   <maintainer email="takaki@todo.todo">takaki</maintainer>
 
@@ -14,12 +14,16 @@
   <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>tf2_sensor_msgs</build_depend>
+  <build_depend>darknet_rospy_msgs</build_depend>
   <build_depend>libuvc_camera</build_depend>
+
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>tf2_sensor_msgs</exec_depend>
+  <build_depend>darknet_rospy_msgs</build_depend>
   <exec_depend>libuvc_camera</exec_depend>
+  
 
 </package>

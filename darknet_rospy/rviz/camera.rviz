@@ -98,7 +98,7 @@ Visualization Manager:
       Value: false
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /recognition_result_image
+      Image Topic: /darknet/recognition_result_image
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -173,5 +173,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 867
-  X: 1524
-  Y: 393
+  X: 179
+  Y: 409

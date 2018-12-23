@@ -1,7 +1,7 @@
 <launch>
 
   <!-- darknet_rospy -->
-  <arg name="input_image_topic" default="/camera/image_color" />
+  <arg name="input_image_topic" default="/kinect_head/qhd/image_color" />
   <arg name="output_image_topic" default="/darknet/recognition_result_image" />
   <arg name="output_topic" default="/darknet/recognition_result" />
 
@@ -9,6 +9,8 @@
   <arg name="weights_file" default="/../darknet/yolov3.weights" />
   <arg name="meta_file" default="/../darknet/cfg/coco.data" />
   <arg name="names_file" default="/../darknet/data/coco.names" />
+
+  <arg name="cropping_area" default="[120,350,250,550]" />
   
   <node pkg="darknet_rospy" type="darknet_rospy.py" name="darknet_rospy" output="screen">
     <param name="net_file" type="str" value="$(arg net_file)" />
@@ -17,7 +19,7 @@
     <param name="meta_file" type="str" value="$(arg meta_file)" />
     <param name="input_image_topic" type="str" value="$(arg input_image_topic)" />
     <param name="output_image_topic" type="str" value="$(arg output_image_topic)" />
-    <param name="output_topic" type="str" value="$(arg output_topic)" />
+    <param name="cropping_area" type="str" value="$(arg cropping_area)" />
   </node>
 
 </launch>
