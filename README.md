@@ -25,7 +25,7 @@ $ catkin build
 Weight files can be downloaded from [this site](https://drive.google.com/open?id=1zRExBBo0Mwwq5hEcr_9zDHb7ZAPK2P-H).
 Place them inside the `darknet` directory.
 
-## Running an Example
+## Running Examples
 - simple example
   ```
   $ rosrun darknet_rospy darknet_webcam.py
