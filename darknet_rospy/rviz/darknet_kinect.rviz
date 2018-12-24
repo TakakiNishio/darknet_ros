@@ -111,8 +111,31 @@ Visualization Manager:
       Marker Topic: /transferred_image_pixel
       Name: MarkerArray
       Namespaces:
-        basic_shapes: true
+        {}
       Queue Size: 100
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        kinect_head:
+          Value: true
+        kinect_head_rgb_optical_frame:
+          Value: true
+        world:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          kinect_head:
+            kinect_head_rgb_optical_frame:
+              {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
@@ -139,7 +162,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.192532033
+      Distance: 0.305718243
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -154,10 +177,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.565202475
+      Pitch: 0.250202715
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.73041344
+      Yaw: 3.54041529
     Saved: ~
 Window Geometry:
   Displays:
@@ -177,5 +200,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 961
-  X: 82
-  Y: 242
+  X: 83
+  Y: 337
