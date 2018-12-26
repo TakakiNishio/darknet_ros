@@ -22,14 +22,26 @@ class DarkPixelTo3DPointNode:
 
     def __init__(self):
         rospy.init_node('DarkPixelTo3DPointNode', anonymous=True)
+        self.target_label = "carrot"
+        self.th_z = 0.018
         self.pointcloud_sub = rospy.Subscriber("/kinect_head/qhd/points", PointCloud2, self.pointcloud_callback, queue_size=1, buff_size=2**24)
         self.dark2d_sub = rospy.Subscriber("/darknet/recognition_result", DarkBoxArray, self.dark_callback, queue_size=1, buff_size=2**24)
-        self.pointcloud_pub = rospy.Publisher("/darknet/pointcloud", PointCloud2, queue_size=1)
+        self.pointcloud_pub = rospy.Publisher("/darknet/"+self.target_label+"/pointcloud", PointCloud2, queue_size=1)
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listner = tf2_ros.TransformListener(self.tf_buffer)
         self.pointcloud = None
         self.run_once_flg = False
-        self.th_z = 0.015
+        self.fields = [PointField('x', 0, PointField.FLOAT32, 1),
+                       PointField('y', 4, PointField.FLOAT32, 1),
+                       PointField('z', 8, PointField.FLOAT32, 1),
+                       PointField('rgba', 12, PointField.UINT32, 1),]
+        self.header = Header()
+        self.header.frame_id = "world"
+        r = 255
+        g = 165
+        b = 0
+        a = 255
+        self.rgb = struct.unpack('I', struct.pack('BBBB', b, g, r, a))[0]
         rospy.loginfo("Initialized DarkPixelTo3DPointNode.")
 
     def pixelTo3DPoint(self, u, v, pointcloud):
@@ -108,72 +120,25 @@ class DarkPixelTo3DPointNode:
                 Z_.append(Z[i])
         return X_, Y_, Z_
 
-    def plot_boxel(self, x, y, z, label, index):
-        fig = plt.figure(1)
-        ax = fig.gca(projection='3d')
-        ax.set_xlabel(r'$x$ [m]',fontsize=14)
-        ax.set_ylabel(r'$y$ [m]',fontsize=14)
-        ax.set_zlabel(r'$z$ [m]',fontsize=14)
-        # ax.set_xlim(0, 0.5)
-        # ax.set_ylim(-0.25, 0.25)
-        ax.set_zlim(-0.1, 0)
-        
-        ax.plot([0], [0], [0], 'o', color='y', ms=6 , label='world origin')
-        ax.plot(x, y, z, "o", color='c', ms=3, mew=0.5, label='extracted pointcloud')
-        ax.legend()
-
-        fig.suptitle('detected object: '+label+' ['+str(index)+']' )
-        plt.tight_layout()
-
-    def generate_pointcloud2_data(self, x, y, z):
-        points = []
-        lim = 8
-        pointN = len(x)
-        for i in range(pointN):
-            px = x[i]
-            py = y[i]
-            pz = z[i]
-            r = 255
-            g = 165
-            b = 0
-            a = 255
-            rgb = struct.unpack('I', struct.pack('BBBB', b, g, r, a))[0]
-            pt = [px, py, pz, rgb]
-            points.append(pt)
-
-        fields = [PointField('x', 0, PointField.FLOAT32, 1),
-                  PointField('y', 4, PointField.FLOAT32, 1),
-                  PointField('z', 8, PointField.FLOAT32, 1),
-                  # PointField('rgb', 12, PointField.UINT32, 1),
-                  PointField('rgba', 12, PointField.UINT32, 1),]
-
-        header = Header()
-        header.frame_id = "world"
-        pc2 = point_cloud2.create_cloud(header, fields, points)
-        return pc2
-
     def pointcloud_callback(self, data):
         self.pointcloud = data
 
     def dark_callback(self, data):
-
         if self.pointcloud is None:
             return
 
-        if self.run_once_flg is True:
-            plt.pause(0.01)
-            return
-        else:
-            self.run_once_flg = True
-            index = 0
-            dark_box = data.dark_array[index]
-            X, Y, Z = self.extract_3d_points(dark_box)
-            X, Y, Z = self.filter_3d_points(X, Y, Z)
-            pointcloud2_data = self.generate_pointcloud2_data(X,Y,Z)
-            self.pointcloud_pub.publish(pointcloud2_data)
-            self.plot_boxel(X,Y,Z, dark_box.label, index)
-            
-            plt.pause(0.01)
+        points = []
+        for dark_box in data.dark_array:
+            if dark_box.label == self.target_label:
+                X, Y, Z = self.extract_3d_points(dark_box)
+                X, Y, Z = self.filter_3d_points(X, Y, Z)
+                pointN = len(X)
+                for i in range(pointN):
+                    pt = [X[i], Y[i], Z[i], self.rgb]
+                    points.append(pt)
+
+        pc2 = point_cloud2.create_cloud(self.header, self.fields, points)
+        self.pointcloud_pub.publish(pc2)            
 
 
 if __name__ == '__main__':
